@@ -1,8 +1,10 @@
 package com.proyecto.deforestacion.service;
 
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.proyecto.deforestacion.exception.RecursoNoEncontradoException;
 import com.proyecto.deforestacion.model.Usuarios;
 import com.proyecto.deforestacion.repository.UsuarioRepository;
 import io.micrometer.common.lang.NonNull;
@@ -41,6 +43,10 @@ public class UsuarioServiceImpl implements UsuarioService	 {			 /*CLASE IMPLEMEN
 	@Override
 	@NonNull    /*OK*/
 	public Usuarios obtenerUsuarioPorId(Long id) {
+	    Optional<Usuarios> usuarios = usuarioRepository.findById(id);
+	    if(!usuarios.isPresent()) {
+	    	throw new RecursoNoEncontradoException("Usuario no encontrado con el id "+id);
+	    }
 	    return usuarioRepository.findById(id).get();
 	}
 	

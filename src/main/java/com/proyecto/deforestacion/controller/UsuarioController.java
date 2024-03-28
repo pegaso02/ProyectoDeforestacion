@@ -22,13 +22,13 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
-    @PostMapping("/registro")           /*OK*/
+    @PostMapping        /*OK*/
     public ResponseEntity<Usuarios> guardarUsuario(@RequestBody Usuarios usuario) {
         Usuarios nuevoUsuario = usuarioService.guardarUsuario(usuario);
         return ResponseEntity.status(HttpStatus.CREATED).body(nuevoUsuario);
     }
     
-    @GetMapping("/")  /*OK*/
+    @GetMapping  									/*OK*/
     public List<Usuarios> listarUsuarios() {
         return usuarioService.listarUsuarios();
     }
